@@ -106,6 +106,40 @@ tbody td.c{text-align:center;}
 .si-en{font-size:11px;color:var(--gray);display:block;}
 .map-note{padding:14px 18px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:12px;margin-bottom:18px;font-size:13px;color:#c4b5fd;line-height:1.7;}
 .map-note strong{color:#e9d5ff;}
+
+.slf-hero{background:linear-gradient(135deg,rgba(14,116,144,.25),rgba(245,158,11,.12));border:1px solid rgba(6,182,212,.22);border-radius:18px;padding:22px;margin-bottom:18px;display:grid;grid-template-columns:1.5fr .9fr;gap:18px;align-items:center;}
+.slf-hero h2{font-family:'Kanit',sans-serif;font-size:24px;margin-bottom:8px;color:var(--white);}
+.slf-hero p{color:#cbd5e1;font-size:14px;line-height:1.75;}
+.slf-note{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#fde68a;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.65;}
+.slf-type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:18px;}
+.slf-type{background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;min-height:145px;}
+.slf-type strong{display:block;color:var(--gold);font-size:15px;margin-bottom:8px;}
+.slf-type p{color:var(--gray);font-size:12px;line-height:1.65;}
+.slf-form{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start;}
+.slf-panel{background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;}
+.slf-panel h3{font-size:16px;margin-bottom:14px;color:var(--gold);}
+.slf-fields{display:grid;grid-template-columns:repeat(2,minmax(180px,1fr));gap:12px;}
+.slf-field{display:flex;flex-direction:column;gap:6px;}
+.slf-field.full{grid-column:1/-1;}
+.slf-field label{font-size:12px;color:var(--gray);font-weight:600;line-height:1.45;}
+.slf-field select,.slf-field input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--white);padding:9px 11px;border-radius:8px;font-family:'Sarabun',sans-serif;font-size:14px;}
+.slf-field select option{background:var(--navy2);}
+.slf-field input:focus,.slf-field select:focus{outline:none;border-color:var(--teal-light);}
+.slf-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.slf-primary{background:var(--teal);border:1px solid var(--teal-light);color:white;padding:9px 16px;border-radius:9px;cursor:pointer;font-family:'Sarabun',sans-serif;font-weight:600;}
+.slf-primary:hover{background:#0f8aaa;}
+.slf-result{border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);}
+.slf-result.pass{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.1);}
+.slf-result.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.1);}
+.slf-result.fail{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.1);}
+.slf-result h3{font-size:20px;margin-bottom:8px;}
+.slf-result p{color:#cbd5e1;font-size:13px;line-height:1.7;margin-bottom:12px;}
+.slf-list{margin:0;padding-left:20px;color:#cbd5e1;font-size:13px;line-height:1.75;}
+.slf-list li.pass{color:#86efac;}.slf-list li.warn{color:#fde68a;}.slf-list li.fail{color:#fca5a5;}
+.slf-mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px;}
+.slf-mini{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;}
+.slf-mini .k{font-size:11px;color:var(--gray);}.slf-mini .v{font-family:'Kanit',sans-serif;font-size:22px;color:var(--white);}
+@media(max-width:900px){.slf-hero,.slf-form{grid-template-columns:1fr;}.slf-fields{grid-template-columns:1fr;}}
 @media(max-width:768px){header{padding:14px;}.tabs{padding:0 6px;}main{padding:14px;}.cr{grid-template-columns:1fr;}}
 
   .curr-card {background:var(--navy2);border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:16px;overflow:hidden;}
@@ -201,6 +235,7 @@ tbody td.c{text-align:center;}
   <button class="tab-btn" onclick="switchTab('aunqa',this)">🎓 AUN-QA / SAR</button>
   <button class="tab-btn" onclick="switchTab('mapping',this)">🔗 การจับคู่ชื่อ</button>
   <button class="tab-btn" onclick="switchTab('curriculum',this)">🏛️ หลักสูตร</button>
+  <button class="tab-btn" onclick="switchTab('slf',this)">💳 คัดกรอง กยศ.</button>
 </div>
 
 <main>
@@ -442,6 +477,55 @@ tbody td.c{text-align:center;}
   <div class="sgrid" id="clStats"></div>
 
   <div id="cl-cards"></div>
+</div>
+
+
+<!-- SLF SCREENING -->
+<div class="tp" id="tab-slf">
+  <div class="slf-hero">
+    <div>
+      <h2>💳 Screening Tool ประเมินความพร้อมก่อนกู้ กยศ.</h2>
+      <p>แบบคัดกรองเบื้องต้นสำหรับนักศึกษาปริญญาตรี เพื่อประเมินคุณสมบัติทั่วไป ประเภทรายการกู้ รายได้ครอบครัว และเงื่อนไขสำหรับการกู้ต่อเนื่องตามข้อมูลที่กำหนด</p>
+    </div>
+    <div class="slf-note">ผลลัพธ์นี้เป็นการประเมินเบื้องต้นเพื่อช่วยเตรียมเอกสารและวางแผนเท่านั้น การอนุมัติจริงขึ้นกับประกาศ กยศ. สถานศึกษา หลักสูตร และระบบ DSL</div>
+  </div>
+
+  <div class="slf-type-grid">
+    <div class="slf-type"><strong>ลักษณะที่ 1</strong><p>ผู้ขาดแคลนทุนทรัพย์ รายได้ครอบครัวไม่เกิน 360,000 บาทต่อปี เหมาะกับผู้ขอกู้ค่าเล่าเรียนและ/หรือค่าครองชีพ</p></div>
+    <div class="slf-type"><strong>ลักษณะที่ 2</strong><p>เรียนในสาขาที่เป็นความต้องการหลักหรือจำเป็นต่อการพัฒนาประเทศ กู้เฉพาะค่าเล่าเรียนได้โดยไม่ใช้รายได้เป็นตัวกำหนด</p></div>
+    <div class="slf-type"><strong>ลักษณะที่ 3</strong><p>เรียนในสาขาขาดแคลนหรือสาขาที่กองทุนมุ่งส่งเสริมเป็นพิเศษ กู้เฉพาะค่าเล่าเรียนได้โดยไม่จำกัดรายได้</p></div>
+    <div class="slf-type"><strong>ลักษณะที่ 4</strong><p>ผู้เรียนดีเพื่อสร้างความเป็นเลิศ ระดับบัณฑิตศึกษา จึงไม่ใช่เป้าหมายหลักของเครื่องมือสำหรับปริญญาตรีนี้</p></div>
+  </div>
+
+  <div class="slf-form">
+    <div class="slf-panel">
+      <h3>กรอกข้อมูลผู้ประเมิน</h3>
+      <div class="slf-fields">
+        <div class="slf-field"><label>สัญชาติไทย</label><select id="slf-thai" onchange="renderSLF()"><option value="yes">ใช่</option><option value="no">ไม่ใช่</option></select></div>
+        <div class="slf-field"><label>อายุ ณ วันที่ขอกู้</label><input id="slf-age" type="number" min="15" max="80" value="20" oninput="renderSLF()"></div>
+        <div class="slf-field"><label>สถานะปริญญาตรี</label><select id="slf-undergrad" onchange="renderSLF()"><option value="yes">มีหนังสือตอบรับ/กำลังศึกษา</option><option value="no">ยังไม่มีสถานะนักศึกษา</option></select></div>
+        <div class="slf-field"><label>เคยสำเร็จปริญญาตรีมาก่อน</label><select id="slf-prev-degree" onchange="renderSLF()"><option value="no">ไม่เคย</option><option value="yes">เคย</option></select></div>
+        <div class="slf-field"><label>เป็นข้าราชการ/พนักงานรัฐที่มีเงินเดือนประจำ</label><select id="slf-gov" onchange="renderSLF()"><option value="no">ไม่เป็น</option><option value="yes">เป็น</option></select></div>
+        <div class="slf-field"><label>บุคคลล้มละลาย</label><select id="slf-bankrupt" onchange="renderSLF()"><option value="no">ไม่เป็น</option><option value="yes">เป็น</option></select></div>
+        <div class="slf-field"><label>เคยต้องโทษจำคุก (ไม่รวมลหุโทษ/ประมาท)</label><select id="slf-prison" onchange="renderSLF()"><option value="no">ไม่เคย</option><option value="yes">เคย</option></select></div>
+        <div class="slf-field"><label>รายได้ครอบครัวต่อปี (บาท)</label><input id="slf-income" type="number" min="0" step="1000" value="300000" oninput="renderSLF()"></div>
+        <div class="slf-field"><label>ต้องการกู้</label><select id="slf-support" onchange="renderSLF()"><option value="both">ค่าเล่าเรียน + ค่าครองชีพ</option><option value="living">ค่าครองชีพ</option><option value="tuition">เฉพาะค่าเล่าเรียน</option></select></div>
+        <div class="slf-field"><label>ลักษณะสาขา/หลักสูตร</label><select id="slf-track" onchange="renderSLF()"><option value="type1">ลักษณะที่ 1: ขาดแคลนทุนทรัพย์</option><option value="type2">ลักษณะที่ 2: ความต้องการหลักของประเทศ</option><option value="type3">ลักษณะที่ 3: สาขาขาดแคลน/ส่งเสริมพิเศษ</option><option value="type4">ลักษณะที่ 4: เรียนดีระดับบัณฑิตศึกษา</option></select></div>
+        <div class="slf-field"><label>GPAX ปัจจุบัน/คาดการณ์</label><input id="slf-gpax" type="number" min="0" max="4" step="0.01" value="2.50" oninput="renderSLF()"></div>
+        <div class="slf-field"><label>ชั่วโมงจิตอาสาต่อปีการศึกษา</label><input id="slf-volunteer" type="number" min="0" max="500" value="36" oninput="renderSLF()"></div>
+      </div>
+      <div class="slf-actions"><button class="slf-primary" onclick="renderSLF()">ประเมินอีกครั้ง</button><button class="btn-r" onclick="resetSLF()">↺ รีเซต</button></div>
+    </div>
+    <div class="slf-panel">
+      <div id="slf-result" class="slf-result warn"></div>
+      <div class="slf-mini-grid">
+        <div class="slf-mini"><div class="k">เพดานรายได้สำหรับค่าครองชีพ</div><div class="v">360,000</div></div>
+        <div class="slf-mini"><div class="k">ค่าครองชีพโดยประมาณ</div><div class="v">3,000/เดือน</div></div>
+        <div class="slf-mini"><div class="k">GPAX ต่อเนื่องขั้นต่ำ</div><div class="v">2.00</div></div>
+        <div class="slf-mini"><div class="k">จิตอาสาขั้นต่ำ</div><div class="v">36 ชม.</div></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 </main>
@@ -806,6 +890,63 @@ function resetTable(){['t-year','t-level','t-sub','t-db'].forEach(id=>{const e=d
 function resetTeacher(){['tc-year','tc-sort'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=id==='tc-sort'?'total':'';});const e=document.getElementById('tc-auth');if(e)e.value='';renderTeacher();}
 function resetAUN(){const e1=document.getElementById('an-start');if(e1)e1.value='2565';const e2=document.getElementById('an-min');if(e2)e2.value='1';const e3=document.getElementById('an-auth');if(e3)e3.value='';const e4=document.getElementById('an-curr');if(e4)e4.value='';renderAUN();}
 
+
+// SLF SCREENING
+function getSLFVal(id){return document.getElementById(id)?.value||'';}
+function fmtBaht(v){return (Number(v)||0).toLocaleString('th-TH');}
+function renderSLF(){
+  const age=Number(getSLFVal('slf-age'))||0;
+  const income=Number(getSLFVal('slf-income'))||0;
+  const gpax=Number(getSLFVal('slf-gpax'))||0;
+  const volunteer=Number(getSLFVal('slf-volunteer'))||0;
+  const support=getSLFVal('slf-support');
+  const track=getSLFVal('slf-track');
+  const general=[];
+  const add=(ok,text,failText=text)=>general.push({ok,text:ok?text:failText});
+  add(getSLFVal('slf-thai')==='yes','มีสัญชาติไทย','ยังไม่ผ่านเงื่อนไขสัญชาติไทย');
+  add(age>0&&age<=30,`อายุ ${age} ปี อยู่ในเกณฑ์ไม่เกิน 30 ปี`,`อายุ ${age||'-'} ปี เกิน/ไม่อยู่ในเกณฑ์ทั่วไปไม่เกิน 30 ปี`);
+  add(getSLFVal('slf-undergrad')==='yes','มีสถานะตอบรับเข้าเรียนหรือกำลังศึกษาระดับปริญญาตรี','ยังไม่มีสถานะตอบรับเข้าเรียนหรือกำลังศึกษาระดับปริญญาตรี');
+  add(getSLFVal('slf-prev-degree')==='no','ไม่เคยสำเร็จปริญญาตรีมาก่อน','เคยสำเร็จปริญญาตรีมาก่อน');
+  add(getSLFVal('slf-gov')==='no','ไม่เป็นข้าราชการหรือพนักงานรัฐที่มีเงินเดือนประจำ','เป็นข้าราชการหรือพนักงานรัฐที่มีเงินเดือนประจำ');
+  add(getSLFVal('slf-bankrupt')==='no','ไม่เป็นบุคคลล้มละลาย','เป็นบุคคลล้มละลาย');
+  add(getSLFVal('slf-prison')==='no','ไม่เคยต้องโทษจำคุกตามเงื่อนไขที่ห้าม','เคยต้องโทษจำคุกตามเงื่อนไขที่ห้าม');
+  const generalPass=general.every(x=>x.ok);
+  const needsLiving=support==='both'||support==='living';
+  const tuitionOnly=support==='tuition';
+  const incomePass=income<=360000;
+  const isType23=track==='type2'||track==='type3';
+  const isType4=track==='type4';
+  let loanPass=false, loanMsg='';
+  if(isType4){loanMsg='ลักษณะที่ 4 เป็นระดับบัณฑิตศึกษา จึงไม่เหมาะกับแบบคัดกรองปริญญาตรีนี้';}
+  else if(needsLiving){loanPass=incomePass;loanMsg=incomePass?'รายได้ครอบครัวไม่เกิน 360,000 บาท/ปี จึงเข้าเงื่อนไขกู้ค่าครองชีพ':'การกู้ค่าครองชีพต้องมีรายได้ครอบครัวไม่เกิน 360,000 บาท/ปี';}
+  else if(tuitionOnly){loanPass=incomePass||isType23;loanMsg=loanPass?(isType23?'กู้เฉพาะค่าเล่าเรียนภายใต้ลักษณะที่ 2/3 ได้โดยไม่ใช้รายได้เป็นตัวกำหนด':'รายได้อยู่ในเกณฑ์ลักษณะที่ 1 สำหรับค่าเล่าเรียน'):'หากรายได้เกินเกณฑ์ ต้องอยู่ในสาขาลักษณะที่ 2 หรือ 3 เพื่อกู้เฉพาะค่าเล่าเรียน';}
+  const gpaxPass=gpax>=2;
+  const volunteerPass=volunteer>=36;
+  const overall=generalPass&&loanPass;
+  const maintain=gpaxPass&&volunteerPass;
+  const cls=overall?'pass':(generalPass?'warn':'fail');
+  const title=overall?'✅ มีแนวโน้มเข้าเกณฑ์เบื้องต้น':(generalPass?'⚠️ คุณสมบัติทั่วไปผ่าน แต่เงื่อนไขรายการกู้ยังต้องตรวจเพิ่ม':'❌ ยังไม่เข้าเกณฑ์เบื้องต้น');
+  const result=document.getElementById('slf-result');
+  if(!result)return;
+  result.className=`slf-result ${cls}`;
+  const supportLabel={both:'ค่าเล่าเรียน + ค่าครองชีพ',living:'ค่าครองชีพ',tuition:'เฉพาะค่าเล่าเรียน'}[support]||'-';
+  const trackLabel={type1:'ลักษณะที่ 1',type2:'ลักษณะที่ 2',type3:'ลักษณะที่ 3',type4:'ลักษณะที่ 4'}[track]||'-';
+  result.innerHTML=`<h3>${title}</h3>
+    <p><strong>รายการที่ประเมิน:</strong> ${supportLabel} · ${trackLabel} · รายได้ครอบครัว ${fmtBaht(income)} บาท/ปี</p>
+    <ul class="slf-list">
+      ${general.map(x=>`<li class="${x.ok?'pass':'fail'}">${x.ok?'ผ่าน':'ไม่ผ่าน'}: ${x.text}</li>`).join('')}
+      <li class="${loanPass?'pass':'fail'}">${loanPass?'ผ่าน':'ไม่ผ่าน'}: ${loanMsg}</li>
+      <li class="${gpaxPass?'pass':'warn'}">เงื่อนไขกู้ต่อเนื่องด้านผลการเรียน: GPAX ${gpax.toFixed(2)} ${gpaxPass?'ไม่ต่ำกว่า':'ต่ำกว่า'} 2.00</li>
+      <li class="${volunteerPass?'pass':'warn'}">เงื่อนไขกู้ต่อเนื่องด้านจิตอาสา: ${volunteer} ชั่วโมง/ปี ${volunteerPass?'ครบ':'ยังไม่ครบ'} 36 ชั่วโมง</li>
+    </ul>
+    <p style="margin-top:12px">${maintain?'พร้อมรักษาเงื่อนไขต่อเนื่องตามข้อมูลที่กรอก':'ควรวางแผนรักษา GPAX และกิจกรรมจิตอาสาให้ครบก่อนยื่นกู้ต่อเนื่อง'} และตรวจสอบเพดานค่าเล่าเรียนตามสาขากับสถานศึกษาอีกครั้ง</p>`;
+}
+function resetSLF(){
+  const defaults={'slf-thai':'yes','slf-age':'20','slf-undergrad':'yes','slf-prev-degree':'no','slf-gov':'no','slf-bankrupt':'no','slf-prison':'no','slf-income':'300000','slf-support':'both','slf-track':'type1','slf-gpax':'2.50','slf-volunteer':'36'};
+  Object.entries(defaults).forEach(([id,val])=>{const e=document.getElementById(id);if(e)e.value=val;});
+  renderSLF();
+}
+
 // TABS
 function switchTab(n,btn){
   document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
@@ -817,6 +958,7 @@ function switchTab(n,btn){
   else if(n==='table')renderTable();
   else if(n==='mapping')renderMapping();
   else if(n==='curriculum'){syncCurrFilter();}
+  else if(n==='slf'){renderSLF();}
 }
 
 
@@ -1105,6 +1247,7 @@ window.onload=()=>{
   syncCurrFilter();
   updateOv();
   renderTable();
+  renderSLF();
   // update year-mode hint on change
   document.getElementById('year-mode')?.addEventListener('change', function(){
     const hint = document.getElementById('year-mode-hint');
